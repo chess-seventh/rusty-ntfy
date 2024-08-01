@@ -34,11 +34,11 @@ impl Server {
 
 #[tokio::main]
 async fn main() {
-    let pub_ip = whereami().await.unwrap();
-    println!("My public IP address is: {pub_ip:?}/32");
 
     let nixos_servers = prep_servers();
     SERVERS.set(nixos_servers.clone()).unwrap();
+
+    let _ = whereami().await.unwrap();
 
     for server in nixos_servers {
         match_server(server).await;
@@ -55,8 +55,30 @@ fn whoami() -> String {
     }
 }
 
-async fn whereami() -> Result<String, reqwest::Error> {
+
+async fn get_pub_ip() -> Result<String, reqwest::Error> {
     reqwest::get("https://api.ipify.org").await?.text().await
+
+}
+
+async fn whereami() -> Result<String, reqwest::Error> {
+    let pub_ip = get_pub_ip().await;
+    let pub_ip2 = pub_ip.as_ref().unwrap();
+
+    let client = reqwest::Client::new();
+    let server = whoami();
+    let msg = format!("Server: {server} public IP address is: {pub_ip2:}/32");
+
+    let _ = client.post("https://ntfy.sh/c7-nixos-pings-d34d-b33f")
+        .body(msg)
+        .header("Title", "NixOS Pinging")
+        .header("Priority", "urgent")
+        .header("Tags", "rainbow")
+        .send()
+    .await?;
+
+    pub_ip
+
 }
 
 fn prep_servers() -> Vec<Server> {
