@@ -34,6 +34,9 @@ impl Server {
 
 #[tokio::main]
 async fn main() {
+    let pub_ip = whereami().await.unwrap();
+    println!("My public IP address is: {pub_ip:?}/32");
+
     let nixos_servers = prep_servers();
     SERVERS.set(nixos_servers.clone()).unwrap();
 
@@ -52,6 +55,10 @@ fn whoami() -> String {
     }
 }
 
+async fn whereami() -> Result<String, reqwest::Error> {
+    reqwest::get("https://api.ipify.org").await?.text().await
+}
+
 fn prep_servers() -> Vec<Server> {
     match read_config() {
         Ok(servers) => servers,
@@ -64,8 +71,7 @@ fn prep_servers() -> Vec<Server> {
 fn read_config() -> Result<Vec<Server>, Box<dyn Error>> {
     let mut config_ini = Ini::new();
 
-    let map = config_ini.load("rusty-ntfy.ini")?;
-    // println!("{map:?}");
+    let _config_map = config_ini.load("rusty-ntfy.ini")?;
     let servers_names: Vec<String> = config_ini.get("servers", "names").unwrap().split_whitespace().map(std::string::ToString::to_string).collect();
 
     let vec_servers: Vec<Server> = servers_names.into_iter().map(|server| {
