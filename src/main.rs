@@ -1,10 +1,14 @@
 #![allow(clippy::unused_io_amount)]
+use configparser::ini::Ini;
+
+use local_ip_address::list_afinet_netifas;
+
+use once_cell::sync::OnceCell;
+
+use std::env;
+use std::error::Error;
 use std::io::prelude::*;
 use std::net::TcpStream;
-use local_ip_address::list_afinet_netifas;
-use once_cell::sync::OnceCell;
-use configparser::ini::Ini;
-use std::error::Error;
 
 
 static SERVERS: OnceCell<Vec<Server>> = OnceCell::new();
@@ -93,7 +97,8 @@ fn prep_servers() -> Vec<Server> {
 fn read_config() -> Result<Vec<Server>, Box<dyn Error>> {
     let mut config_ini = Ini::new();
 
-    let _config_map = config_ini.load("rusty-ntfy.ini")?;
+    let config_file = format!("{}/.config/rusty-ntfy.ini", env::var("HOME").unwrap());
+    let _config_map = config_ini.load(config_file)?;
     let servers_names: Vec<String> = config_ini.get("servers", "names").unwrap().split_whitespace().map(std::string::ToString::to_string).collect();
 
     let vec_servers: Vec<Server> = servers_names.into_iter().map(|server| {
