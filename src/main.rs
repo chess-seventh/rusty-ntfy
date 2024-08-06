@@ -97,7 +97,7 @@ fn prep_servers() -> Vec<Server> {
 fn read_config() -> Result<Vec<Server>, Box<dyn Error>> {
     let mut config_ini = Ini::new();
 
-    let config_file = format!("{}/.config/rusty-ntfy.ini", env::var("HOME").unwrap());
+    let config_file = format!("{}/.config/rusty-ntfy/rusty-ntfy.ini", env::var("HOME").unwrap());
     let _config_map = config_ini.load(config_file)?;
     let servers_names: Vec<String> = config_ini.get("servers", "names").unwrap().split_whitespace().map(std::string::ToString::to_string).collect();
 
