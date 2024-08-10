@@ -38,7 +38,6 @@ impl Server {
 
 #[tokio::main]
 async fn main() {
-
     let nixos_servers = prep_servers();
     SERVERS.set(nixos_servers.clone()).unwrap();
 
@@ -82,7 +81,6 @@ async fn whereami() -> Result<String, reqwest::Error> {
     .await?;
 
     pub_ip
-
 }
 
 fn prep_servers() -> Vec<Server> {
@@ -108,7 +106,6 @@ fn read_config() -> Result<Vec<Server>, Box<dyn Error>> {
     }).collect();
 
     Ok(vec_servers)
-
 }
 
 async fn match_server(server: Server) {
@@ -120,11 +117,9 @@ async fn match_server(server: Server) {
             let _ =send_to_ntfy(server, "has NOT been able to", "skull").await;
         },
     }
-
 }
 
 fn connect_to_server(server: &Server) -> std::io::Result<()> {
-
     let mut stream = TcpStream::connect(server.connection_string())?;
 
     stream.write(&[1])?;
@@ -165,11 +160,9 @@ async fn send_to_ntfy(dest_server: Server, msg: &str, emoji: &str) -> Result<(),
             .header("Tags", emoji)
             .send()
         .await?;
-
         return Ok(())
     }
 
     Ok(())
-
 }
 
