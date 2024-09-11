@@ -188,9 +188,7 @@ Project Link: [https://github.com/chess-seventh/rusty-ntfy](https://github.com/c
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* []()
-* []()
-* []()
+Be the first!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
