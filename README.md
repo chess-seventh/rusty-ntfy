@@ -21,7 +21,6 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
 
 <!-- PROJECT LOGO -->
 <br />
@@ -31,7 +30,7 @@
 <h3 align="center">rusty-ntfy</h3>
 
   <p align="center">
-    project_description
+    my way to make sure that my tailscale nodes are up and can communicate with each other
     <br />
     <a href="https://github.com/chess-seventh/rusty-ntfy"><strong>Explore the docs »</strong></a>
     <br />
@@ -158,7 +157,7 @@ Don't forget to give the project a star! Thanks again!
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+3. Commit your Changes (`git commit -am 'feat: Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
@@ -173,7 +172,7 @@ Don't forget to give the project a star! Thanks again!
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -207,4 +206,3 @@ Project Link: [https://github.com/chess-seventh/rusty-ntfy](https://github.com/c
 [issues-url]: https://github.com/chess-seventh/rusty-ntfy/issues
 [license-shield]: https://img.shields.io/github/license/chess-seventh/rusty-ntfy.svg?style=for-the-badge
 [license-url]: https://github.com/chess-seventh/rusty-ntfy/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
