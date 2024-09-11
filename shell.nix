@@ -4,12 +4,20 @@ let
   ruststable = (nixpkgs.latest.rustChannels.stable.rust.override { extensions = [ "rust-src" "rls-preview" "rust-analysis" "rustfmt-preview" ];});
 in
   with nixpkgs;
-  stdenv.mkDerivation {
-    name = "rust";
-    buildInputs = [ openssl rustup ruststable cmake zlib ];
+stdenv.mkDerivation {
+  name = "rust";
+  buildInputs = [ 
+    openssl 
+    rustup 
+    ruststable 
+    cmake 
+    zlib 
+    diesel-cli 
+    postgresql
+  ];
 
-    shellHook = ''
+  shellHook = ''
         export OPENSSL_DIR="${openssl.dev}"
         export OPENSSL_LIB_DIR="${openssl.out}/lib"
-    '';
-  }
+        '';
+}
