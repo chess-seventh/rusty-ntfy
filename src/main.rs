@@ -130,7 +130,7 @@ async fn whereami(mut nixos_servers: Vec<Server>) -> Result<String, reqwest::Err
     let msg = format!("Server: {server} public IP address is: {pub_ip2:}/32");
 
     let _ = client
-        .post("https://ntfy.sh/c7-nixos-pings-d34d-b33f")
+        .post(format!("https://ntfy.sh/c7-{server}-pings-d34d-b33f"))
         .body(msg)
         .header("Title", "NixOS Pinging")
         .header("Priority", "urgent")
