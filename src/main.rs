@@ -186,7 +186,7 @@ async fn send_to_ntfy(dest_server: Server, msg: &str, emoji: &str) -> Result<(),
         let client = reqwest::Client::new();
 
         let _ = client
-            .post("https://ntfy.sh/c7-nixos-pings-d34d-b33f")
+            .post(format!("https://ntfy.sh/c7-{my_name}-pings-d34d-b33f"))
             .body(data_msg)
             .header("Title", "NIXOS Pinging")
             .header("Priority", "urgent")
