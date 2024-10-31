@@ -43,12 +43,15 @@ pub async fn retrieve_self(
         name: self_client.hostname,
         online: self_client.online,
     }
-}
+} 
 
 pub async fn prepare_peers(peer: HashMap<String, tailscale_localapi::PeerStatus>) {
-    let nixos_servers = get_peers(&peer);
+    let mut nixos_servers = get_peers(&peer);
 
     let _ = whereami(nixos_servers.clone()).await.unwrap();
+
+    // TODO: set ignore tailscale peers in the ini file
+    nixos_servers.retain(|server| !server.name.contains("Fairphone"));
 
     for server in nixos_servers {
         match_server(server).await;
@@ -66,8 +69,10 @@ pub fn get_peers(peer: &HashMap<String, tailscale_localapi::PeerStatus>) -> Vec<
         .collect::<Vec<Server>>()
 }
 
+// TODO: make this dynamic from ini file
 pub fn get_proper_port(hostname: &str) -> u16 {
     if hostname.contains("bullwackies") {
+        // TODO: set specific port in ini file
         41234
     } else {
         22
@@ -77,7 +82,7 @@ pub fn get_proper_port(hostname: &str) -> u16 {
 pub fn whoami() -> String {
     let local_ip = get_ip().unwrap();
 
-    match SERVERS.get().unwrap().iter().find(|&s| s.ip == local_ip) {
+    match SERVERS.get().expect("Could not get the servers").iter().find(|&s| s.ip == local_ip) {
         Some(server) => server.name.clone(),
         None => "unknown".to_string(),
     }
@@ -105,7 +110,9 @@ pub async fn whereami(mut nixos_servers: Vec<Server>) -> Result<String, reqwest:
     let server = whoami();
     let msg = format!("Server: {server} public IP address is: {pub_ip2:}/32");
 
-    query_ntfy(client, msg, "rock", &server).await?;
+    // TODO: pass this as a param to function and make set it in the ini config file
+    let send_public_ip_to_ntfy = false;
+    if send_public_ip_to_ntfy { query_ntfy(client, msg, "rock", &server).await? }
 
     pub_ip
 }
@@ -113,7 +120,7 @@ pub async fn whereami(mut nixos_servers: Vec<Server>) -> Result<String, reqwest:
 pub async fn match_server(server: Server) {
     match connect_to_server(&server.clone()) {
         Ok(()) => {
-            let _ = send_to_ntfy(server, "has been able to", "rainbow").await;
+            // let _ = send_to_ntfy(server, "has been able to", "rainbow").await;
         }
         Err(_e) => {
             let _ = send_to_ntfy(server, "has NOT been able to", "skull").await;
