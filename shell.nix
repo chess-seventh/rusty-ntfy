@@ -14,6 +14,7 @@ stdenv.mkDerivation {
     zlib 
     diesel-cli 
     postgresql
+    cargo
   ];
 
   shellHook = ''
