@@ -51,7 +51,11 @@ pub async fn prepare_peers(peer: HashMap<String, tailscale_localapi::PeerStatus>
     let _ = whereami(nixos_servers.clone()).await.unwrap();
 
     // TODO: set ignore tailscale peers in the ini file
-    nixos_servers.retain(|server| !server.name.contains("Fairphone") && !server.name.contains("localhost"));
+    nixos_servers.retain(|server| !server.name.contains("Fairphone"));
+    nixos_servers.retain(|server| !server.name.contains("localhost"));
+
+    println!("{nixos_servers:?}");
+    // nixos_servers.retain(|server| !server.name.contains("localhost") );
 
     for server in nixos_servers {
         match_server(server).await;
