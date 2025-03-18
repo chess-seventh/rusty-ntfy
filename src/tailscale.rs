@@ -54,9 +54,6 @@ pub async fn prepare_peers(peer: HashMap<String, tailscale_localapi::PeerStatus>
     nixos_servers.retain(|server| !server.name.contains("Fairphone"));
     nixos_servers.retain(|server| !server.name.contains("localhost"));
 
-    println!("{nixos_servers:?}");
-    // nixos_servers.retain(|server| !server.name.contains("localhost") );
-
     for server in nixos_servers {
         match_server(server).await;
     }
