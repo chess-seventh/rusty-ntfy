@@ -1249,9 +1249,9 @@ dependencies = [
 
 [[package]]
 name = "tailscale-localapi"
-version = "0.4.0"
+version = "0.4.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1394cad4536fcca0ebbe1e5cc7a936197077d086b08e5f0c68d9a9238bfbfeea"
+checksum = "0c0befa7b50f25c48fbcb09da1cf809ff26c497e421ce14f92e638b5896af426"
 dependencies = [
  "async-trait",
  "base64 0.21.7",
