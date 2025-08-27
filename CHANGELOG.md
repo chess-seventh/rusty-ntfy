@@ -1,4 +1,8 @@
-# 1.1.0 (2025-08-27)
+## [1.1.1](https://github.com/chess-seventh/rusty-ntfy/compare/v1.1.0...v1.1.1) (2025-08-27)
+
+
+
+# [1.1.0](https://github.com/chess-seventh/rusty-ntfy/compare/5a59b867280c86255d8c44ed770506d969854ad0...v1.1.0) (2025-08-27)
 
 
 ### Bug Fixes
