@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/chess-seventh/rusty-ntfy/compare/v1.1.1...v2.0.0) (2025-09-17)
+
+
+* feat!: Overhaul development environment setup ([5e34200](https://github.com/chess-seventh/rusty-ntfy/commit/5e342007e04e36cce4bb6189abbfd38e71690b85))
+
+
+### BREAKING CHANGES
+
+* Overhaul development environment setup with devenv.nix
+
+
+
 ## [1.1.1](https://github.com/chess-seventh/rusty-ntfy/compare/v1.1.0...v1.1.1) (2025-08-27)
 
 
