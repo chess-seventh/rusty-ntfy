@@ -1,3 +1,12 @@
+# [2.1.0](https://github.com/chess-seventh/rusty-ntfy/compare/v2.0.0...v2.1.0) (2025-10-03)
+
+
+### Features
+
+* Update diesel and rusty-commit-saver dependencies ([ebcbded](https://github.com/chess-seventh/rusty-ntfy/commit/ebcbdedc971228fbe578dbc70227ecefa9197442))
+
+
+
 # [2.0.0](https://github.com/chess-seventh/rusty-ntfy/compare/v1.1.1...v2.0.0) (2025-09-17)
 
 
@@ -14,7 +23,7 @@
 
 
 
-# [1.1.0](https://github.com/chess-seventh/rusty-ntfy/compare/5a59b867280c86255d8c44ed770506d969854ad0...v1.1.0) (2025-08-27)
+# [1.1.0](https://github.com/chess-seventh/rusty-ntfy/compare/v1.0.0...v1.1.0) (2025-08-27)
 
 
 ### Bug Fixes
