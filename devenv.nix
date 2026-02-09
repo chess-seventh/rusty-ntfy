@@ -75,7 +75,9 @@
         "gitlint"
         "gptcommit"
       ];
-      entry = "${inputs.rusty-commit-saver.packages.${pkgs.system}.default}/bin/rusty-commit-saver";
+      entry = "${
+        inputs.rusty-commit-saver.packages.${pkgs.stdenv.hostPlatform.system}.default
+      }/bin/rusty-commit-saver";
       pass_filenames = false;
       language = "system";
       always_run = true;
