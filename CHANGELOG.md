@@ -1,3 +1,12 @@
+# [2.2.0](https://github.com/chess-seventh/rusty-ntfy/compare/v2.1.0...v2.2.0) (2026-02-09)
+
+
+### Features
+
+* update dependencies ([#52](https://github.com/chess-seventh/rusty-ntfy/issues/52)) ([920a8eb](https://github.com/chess-seventh/rusty-ntfy/commit/920a8eb70806f3e49922f30391b343b3b15491e5))
+
+
+
 # [2.1.0](https://github.com/chess-seventh/rusty-ntfy/compare/v2.0.0...v2.1.0) (2025-10-03)
 
 
