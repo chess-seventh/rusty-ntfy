@@ -1,3 +1,12 @@
+# [2.3.0](https://github.com/chess-seventh/rusty-ntfy/compare/v2.2.0...v2.3.0) (2026-02-09)
+
+
+### Features
+
+* Enhance git-hooks with platform compatibility ([99bd635](https://github.com/chess-seventh/rusty-ntfy/commit/99bd63591f90503be6f884b760f4db2fd42e9184))
+
+
+
 # [2.2.0](https://github.com/chess-seventh/rusty-ntfy/compare/v2.1.0...v2.2.0) (2026-02-09)
 
 
