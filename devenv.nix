@@ -1,4 +1,10 @@
-{ pkgs, lib, config, inputs, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  inputs,
+  ...
+}:
 
 {
   dotenv.enable = true;
@@ -48,7 +54,9 @@
     shell.enable = true;
   };
 
-  processes = { cargo-watch.exec = "cargo-watch"; };
+  processes = {
+    cargo-watch.exec = "cargo-watch";
+  };
 
   tasks = {
     "bash:source_env" = {
@@ -62,10 +70,12 @@
       enable = true;
       name = "🦀 Rusty Commit Saver";
       stages = [ "post-commit" ];
-      after = [ "commitizen" "gitlint" "gptcommit" ];
-      entry = "${
-          inputs.rusty-commit-saver.packages.${pkgs.system}.default
-        }/bin/rusty-commit-saver";
+      after = [
+        "commitizen"
+        "gitlint"
+        "gptcommit"
+      ];
+      entry = "${inputs.rusty-commit-saver.packages.${pkgs.system}.default}/bin/rusty-commit-saver";
       pass_filenames = false;
       language = "system";
       always_run = true;
@@ -117,7 +127,7 @@
       name = "🌲 TreeFMT";
       enable = true;
       settings.formatters = [
-        pkgs.nixfmt-classic
+        pkgs.nixfmt
         pkgs.deadnix
         pkgs.yamlfmt
         pkgs.rustfmt
@@ -222,8 +232,7 @@
     echo 💡 Helper scripts to ease development process:
     echo
     ${pkgs.gnused}/bin/sed -e 's| |••|g' -e 's|=| |' <<EOF | ${pkgs.util-linuxMinimal}/bin/column -t | ${pkgs.gnused}/bin/sed -e 's|^|• |' -e 's|••| |g'
-    ${lib.generators.toKeyValue { }
-    (lib.mapAttrs (name: value: value.description) config.scripts)}
+    ${lib.generators.toKeyValue { } (lib.mapAttrs (name: value: value.description) config.scripts)}
     EOF
     echo
   '';
