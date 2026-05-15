@@ -9,15 +9,7 @@
 {
   dotenv.enable = true;
 
-  env.GREET = "Welcome to the Rusty CV Commit Saver";
-
-  starship = {
-    enable = true;
-    config = {
-      enable = false;
-      path = "~/.config/starship.toml";
-    };
-  };
+  env.GREET = "Welcome to the Rusty NTFY";
 
   packages = with pkgs; [
     git
