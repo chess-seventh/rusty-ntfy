@@ -17,9 +17,6 @@
     curl
     gnused
     zlib
-    sqlite
-    diesel-cli
-    postgresql
     cargo-nextest
     cargo-shear
     cargo-llvm-cov
