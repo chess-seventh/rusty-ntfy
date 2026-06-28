@@ -43,7 +43,7 @@ pub async fn retrieve_self(
         name: self_client.hostname,
         online: self_client.online,
     }
-} 
+}
 
 pub async fn prepare_peers(peer: HashMap<String, tailscale_localapi::PeerStatus>) {
     let mut nixos_servers = get_peers(&peer);
@@ -83,7 +83,12 @@ pub fn get_proper_port(hostname: &str) -> u16 {
 pub fn whoami() -> String {
     let local_ip = get_ip().unwrap();
 
-    match SERVERS.get().expect("Could not get the servers").iter().find(|&s| s.ip == local_ip) {
+    match SERVERS
+        .get()
+        .expect("Could not get the servers")
+        .iter()
+        .find(|&s| s.ip == local_ip)
+    {
         Some(server) => server.name.clone(),
         None => "unknown".to_string(),
     }
@@ -113,7 +118,9 @@ pub async fn whereami(mut nixos_servers: Vec<Server>) -> Result<String, reqwest:
 
     // TODO: pass this as a param to function and make set it in the ini config file
     let send_public_ip_to_ntfy = false;
-    if send_public_ip_to_ntfy { query_ntfy(client, msg, "rock", &server).await? }
+    if send_public_ip_to_ntfy {
+        query_ntfy(client, msg, "rock", &server).await?
+    }
 
     pub_ip
 }
@@ -137,10 +144,7 @@ pub fn connect_to_server(server: &Server) -> std::io::Result<()> {
         stream.read(&mut [0; 128])?;
         Ok(())
     } else {
-        Err(std::io::Error::new(
-            std::io::ErrorKind::Other,
-            "Server is offline",
-        ))
+        Err(std::io::Error::other("Server is offline"))
     }
 }
 
