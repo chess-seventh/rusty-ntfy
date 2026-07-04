@@ -44,7 +44,7 @@ pub async fn query_ntfy(
 
 // Config path: honour RUSTY_NTFY_CONFIG (set by the NixOS module to a
 // sops-provided file) and fall back to the historic per-user location.
-fn config_path() -> String {
+pub(crate) fn config_path() -> String {
     env::var("RUSTY_NTFY_CONFIG").unwrap_or_else(|_| {
         format!(
             "{}/.config/rusty-ntfy/rusty-ntfy.ini",
