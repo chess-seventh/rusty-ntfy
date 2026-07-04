@@ -9,5 +9,5 @@ tokio = {version = "1.52.3", features = ["full"]}
 [package]
 authors = ["Chess Seventh"]
 name = "rusty-ntfy"
-version = "2.3.2"
+version = "2.4.0"
 edition = "2021"

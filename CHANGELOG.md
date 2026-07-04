@@ -1,3 +1,14 @@
+# [2.4.0](https://github.com/chess-seventh/rusty-ntfy/compare/v2.3.2...v2.4.0) (2026-07-04)
+
+
+### Features
+
+* allow overriding config path via RUSTY_NTFY_CONFIG ([cac4c5e](https://github.com/chess-seventh/rusty-ntfy/commit/cac4c5e33189be9affec1a2550de5410e310a1d9))
+* **digest:** add multi-transport digest notify + CLI entrypoint ([f3ee08c](https://github.com/chess-seventh/rusty-ntfy/commit/f3ee08caba76628fe5a80b6c612a2bce2e991cd7))
+* **nix:** add flake package and reusable nixosModule ([47fc5b1](https://github.com/chess-seventh/rusty-ntfy/commit/47fc5b124e2f7a2d4cd3976bf7442ad73c301067))
+
+
+
 ## [2.3.2](https://github.com/chess-seventh/rusty-ntfy/compare/v2.3.1...v2.3.2) (2026-06-16)
 
 
