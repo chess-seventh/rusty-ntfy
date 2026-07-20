@@ -62,7 +62,6 @@
       after = [
         "commitizen"
         "gitlint"
-        "gptcommit"
       ];
       entry = "${
         inputs.rusty-commit-saver.packages.${pkgs.stdenv.hostPlatform.system}.default
@@ -141,15 +140,9 @@
       stages = [ "post-commit" ];
     };
 
-    gptcommit = {
-      name = "🤖 GPT Commit";
-      enable = true;
-    };
-
     gitlint = {
       name = "✨ GitLint";
       enable = true;
-      after = [ "gptcommit" ];
     };
 
     markdownlint = {
@@ -169,17 +162,6 @@
   };
 
   scripts = {
-    install_pre_hooks = {
-      description = "Install Pre Hooks, such as gptcommit";
-      exec = ''
-        #!/usr/bin/env bash
-        set -euxo pipefail
-        gptcommit install
-        gptcommit config set openai.model gpt-4-turbo
-        gptcommit config set output.conventional_commit true
-      '';
-    };
-
     cclippy = {
       description = ''
         Run clippy
