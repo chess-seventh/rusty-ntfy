@@ -8,7 +8,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
       - name: 🛠️ Setup Rust
@@ -17,7 +17,7 @@ jobs:
         run: cargo install cargo-edit
       - name: 🎨 Conventional Changelog Action
         id: changelog
-        uses: TriPSs/conventional-changelog-action@v5
+        uses: TriPSs/conventional-changelog-action@v6
         with:
           git-user-name: "chess-seventh"
           git-user-email: "chess7th@pm.me"
