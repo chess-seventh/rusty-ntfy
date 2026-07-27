@@ -1,3 +1,7 @@
+## [2.4.2](https://github.com/chess-seventh/rusty-ntfy/compare/v2.4.1...v2.4.2) (2026-07-27)
+
+
+
 ## [2.4.1](https://github.com/chess-seventh/rusty-ntfy/compare/v2.4.0...v2.4.1) (2026-07-20)
 
 
