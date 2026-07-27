@@ -5,7 +5,9 @@
 
 rustPlatform.buildRustPackage {
   pname = "rusty-ntfy";
-  version = "2.3.2";
+  # Track Cargo.toml so the release.yml version bump propagates automatically
+  # (no manual edit here on every release).
+  version = (lib.importTOML ../Cargo.toml).package.version;
 
   # Only the cargo inputs — keep target/, .git, devenv out of the build.
   src = lib.fileset.toSource {
