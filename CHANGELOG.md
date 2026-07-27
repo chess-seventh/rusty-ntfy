@@ -1,3 +1,12 @@
+## [2.4.3](https://github.com/chess-seventh/rusty-ntfy/compare/v2.4.2...v2.4.3) (2026-07-27)
+
+
+### Bug Fixes
+
+* **nix:** derive package version from Cargo.toml ([8c4b7b9](https://github.com/chess-seventh/rusty-ntfy/commit/8c4b7b92d56de0f0caff0c62a3827fc17145f415))
+
+
+
 ## [2.4.2](https://github.com/chess-seventh/rusty-ntfy/compare/v2.4.1...v2.4.2) (2026-07-27)
 
 
