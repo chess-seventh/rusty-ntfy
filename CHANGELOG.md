@@ -1,3 +1,12 @@
+# [2.5.0](https://github.com/chess-seventh/rusty-ntfy/compare/v2.4.6...v2.5.0) (2026-08-29)
+
+
+### Features
+
+* **L235:** declare the fleet gate as this repo's own hooks ([62f946a](https://github.com/chess-seventh/rusty-ntfy/commit/62f946a6f6ce55240250d6670034af047aec8d8e))
+
+
+
 ## [2.4.6](https://github.com/chess-seventh/rusty-ntfy/compare/v2.4.5...v2.4.6) (2026-07-28)
 
 
