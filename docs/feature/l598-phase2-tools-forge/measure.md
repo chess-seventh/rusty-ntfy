@@ -106,9 +106,10 @@ is empty.
 
 ## Must-prove 3 — a push to the forge creates a task on a seat that exists
 
-⛔ **NOT YET MEASURED** — depends on Must-prove 1's push landing and a
-subsequent push (or the eventual pull request) triggering
-`.forgejo/workflows/gate.yaml`. Record the task id here once one runs.
+✅ **MEASURED 2026-09-27, both green**, commit-status API against `171369c`:
+
+- `gate / gate (push)` — task 2, successful in 52s
+- `gate / gate (pull_request)` — task 3, successful in 44s
 
 ## Must-prove 4 — no push mirror is created, and the README says why
 
