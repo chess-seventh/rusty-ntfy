@@ -1,0 +1,93 @@
+# The authoritative gate. L598 made this repository canonical on the fleet's
+# forge, so `nix flake check` runs here on every push and every pull request —
+# the same command `.github/workflows-paused/nix.yml` ran and README already
+# tells a human to run. `.github/workflows-paused/build.yml`'s plain `cargo
+# build` and `release.yml`'s GitHub release are both parked, not ported: the
+# former is a strict subset of what the flake's `checks.package` already builds,
+# and the latter is a GitHub-specific publish step this forge has no equivalent
+# for yet.
+#
+# ⛔ NO `uses:` STEPS, DELIBERATELY. A `uses:` step is fetched over the internet
+# by a service whose entire design is reachable only from inside the fleet's own
+# network, and the fleet's record says `run:`-only workflows work here today
+# while `uses:` is untested. So the checkout is written out below.
+#
+# ⛔ NO MACHINE IS NAMED IN THIS FILE, ONLY A LABEL. A box name is an operator
+# fact and a workflow needs a label anyway: the day a second capable box exists
+# it offers the same label and this file is not edited.
+name: gate
+on:
+  push:
+  pull_request:
+# ⛔ GIT MUST NOT REACH FOR A PAGER. act_runner gives a step a pty, so git sees
+# an interactive terminal and launches core.pager — and a job's PATH is the
+# runner's declared hostPackages, which do not include `less`. Measured on a
+# sibling repository's gate before this one existed.
+env:
+  GIT_PAGER: cat
+  # ⛔ NO STEP THAT RUNS `git fetch` MAY EVER PROMPT. Job-level, so every such
+  # step gets it. A bad or expired credential otherwise makes git ask for a
+  # username on the runner's pty, and nothing here reads stdin — the step then
+  # hangs to its wall-clock bound instead of failing in seconds.
+  GIT_TERMINAL_PROMPT: "0"
+# ⛔ ONE RUN PER REF, AND THE OLD ONE IS CANCELLED — a second push landing while
+# the first still builds is what this collapses. It does NOT collapse `push`
+# against `pull_request`: the two events carry different `github.ref` values,
+# and the must-prove here is that the gate runs on both.
+concurrency:
+  group: gate-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  gate:
+    runs-on: nix
+    # ⛔ A WALL-CLOCK BOUND, WHICH THE RUNNER DOES NOT HAVE ON ITS OWN. Its
+    # config takes the upstream default of three hours, and a gate that hangs
+    # holds the fleet's only nix seat for that long. Unmeasured for this
+    # repository specifically — thirty is the sibling migrations' figure for a
+    # small Rust crate, kept here as a starting bound rather than invented fresh.
+    timeout-minutes: 30
+    steps:
+      - name: checkout
+        # ⛔ THE TOKEN IS SCOPED TO THIS STEP. It is the runner's repository
+        # token and it carries WRITE. The `gate` step below builds the branch
+        # under test, which is arbitrary code; a job-level `env:` would hand
+        # that code a write credential for the repository it is testing.
+        timeout-minutes: 15
+        env:
+          FORGEJO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          git init -q .
+          git remote add origin "${GITHUB_SERVER_URL%/}/${GITHUB_REPOSITORY}.git"
+          export GIT_CONFIG_COUNT=1
+          export GIT_CONFIG_KEY_0=http.extraheader
+          GIT_CONFIG_VALUE_0="Authorization: Basic $(printf '%s' "x-access-token:${FORGEJO_TOKEN}" | base64 -w0)"
+          export GIT_CONFIG_VALUE_0
+          export GIT_HTTP_LOW_SPEED_LIMIT=1 GIT_HTTP_LOW_SPEED_TIME=60
+          deadline=$((SECONDS + 600))
+          fetch() {
+            local attempt left
+            for attempt in 1 2; do
+              left=$((deadline - SECONDS))
+              ((left > 0)) || break
+              ((left < 420)) || left=420
+              if timeout -k 10 "$left" git fetch -q "$@"; then return 0; fi
+              echo "checkout: git fetch $* failed or timed out, attempt $attempt of 2" >&2
+            done
+            return 1
+          }
+          # Full history and tags, not `--depth=1`: this repository's hooks run
+          # gitlint/commitizen over the history, and a one-commit checkout would
+          # walk one commit and call that green.
+          fetch --tags origin "${GITHUB_SHA}"
+          git checkout -q FETCH_HEAD
+          git log -1 --oneline
+      - name: gate
+        # `flake.nix`'s `checks` attribute is the single definition of what the
+        # gate IS — the package build (which runs the cargo suite through
+        # buildRustPackage's check phase) and the NixOS module-eval. A check
+        # listed here and not there would be a second truth about what green
+        # means.
+        run: |
+          set -euo pipefail
+          nix flake check -L

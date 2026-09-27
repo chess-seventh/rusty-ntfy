@@ -1,3 +1,8 @@
+# PARKED by L598: this repository is canonical on the fleet's forge now, and
+# its gate is `.forgejo/workflows/gate.yaml`. GitHub Actions never reads a
+# workflow outside `.github/workflows/`, so moving this file here is what
+# disables it; the new gate runs this exact `nix flake check -L` command, on
+# the fleet's own runner instead of `ubuntu-latest`.
 name: ❄️ Nix
 on:
   push:

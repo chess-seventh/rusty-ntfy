@@ -1,3 +1,10 @@
+# PARKED by L598: this repository is canonical on the fleet's forge now.
+# GitHub Actions never reads a workflow outside `.github/workflows/`, so
+# moving this file here is what disables it. Not ported: it auto-versions
+# `Cargo.toml`, commits and pushes `Cargo.lock`, and publishes a GitHub
+# Release from `uses:` actions this forge's own gate deliberately avoids
+# (fetched over the internet, tailnet-only design). Whether and how a release
+# flow exists on the forge is a separate decision, not this lane's to make.
 name: 🎯 Release
 on:
   push:
