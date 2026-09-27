@@ -23,6 +23,7 @@
 [![MIT License][license-shield]][license-url]
 
 <!-- PROJECT LOGO -->
+<!-- markdownlint-disable MD013 -->
 <br />
 <div align="center">
   <a href="https://github.com/chess-seventh/rusty-ntfy">rusty-ntfy</a>
@@ -42,6 +43,7 @@
     <a href="https://github.com/chess-seventh/rusty-ntfy/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
   </p>
 </div>
+<!-- markdownlint-enable MD013 -->
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -77,6 +79,35 @@
 ### Built With
 
 rust
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Where this repository lives
+
+**The fleet's forge is canonical (L598).** `tools/rusty-ntfy` on the forge is
+where this repository is developed, where its branches are cut and where its
+gate runs; the GitHub repository it came from is a **mirror downstream of it**.
+Both carry every branch and tag, at the same objects.
+
+⚠ **So a commit pushed to GitHub is a commit the forge does not have, and the
+mirror will overwrite it.** Clone from the forge, on the fleet's own network:
+
+```bash
+git clone ssh://forgejo@nixos-02.caracara-palermo.ts.net:2223/tools/rusty-ntfy.git
+```
+
+⚠ **THE MIRROR IS A PUSH MIRROR AND IT IS NOT THIS REPOSITORY'S TO CONFIGURE.**
+It is an admin-level setting on the forge carrying a GitHub credential, so it is
+set by hand and not by anything here. Until it is live, GitHub holds whatever it
+held on the day of the move; `docs/feature/l598-phase2-tools-forge/measure.md`
+records what was measured.
+
+⛔ **THE THREE GitHub ACTIONS WORKFLOWS THIS REPOSITORY HAD ARE PARKED, NOT
+DELETED** — `.github/workflows-paused/`, each with a header saying why. Under a
+mirror, a workflow on the mirror runs against a tree nobody develops on, and
+its result is reported against commits the forge already judged — two gates
+disagreeing about one commit. The gate is `.forgejo/workflows/gate.yaml`, and it
+runs the same `nix flake check -L` the parked `nix.yml` ran.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -129,7 +160,9 @@ This is an example of how to list things you need to use the software and how to
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+Use this space to show useful examples of how a project can be used. Additional
+screenshots, code examples and demos work well in this space. You may also
+link to more resources.
 
 _For more examples, please refer to the [Documentation](https://example.com)_
 
@@ -143,7 +176,8 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 * [ ] Feature 3
   * [ ] Nested Feature
 
-See the [open issues](https://github.com/chess-seventh/rusty-ntfy/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/chess-seventh/rusty-ntfy/issues) for
+a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -165,7 +199,7 @@ wall in front of entering this shell on every box, CI included.
 On a box with no fleet gate installed it says so on every commit, and never
 blocks:
 
-```
+```text
 fleet gate: NOT INSTALLED on this box - pre-commit ran this repo's hooks only
 ```
 
@@ -186,9 +220,13 @@ git config --unset hooks.fleetGate.skip     # restore it
 
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Contributions are what make the open source community such an amazing place
+to learn, inspire, and create. Any contributions you make are **greatly
+appreciated**.
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+If you have a suggestion that would make this better, please fork the repo
+and create a pull request. You can also simply open an issue with the tag
+"enhancement".
 Don't forget to give the project a star! Thanks again!
 
 1. Fork the Project
